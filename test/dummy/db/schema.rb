@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20160110221317) do
 
   create_table "users", force: :cascade do |t|
     t.string   "phone"
+    t.string   "mobile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
