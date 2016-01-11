@@ -2,9 +2,7 @@
 
 What is a value object?
 
-## Documentation
-
-### Create a value object
+## How to use
 
 1. Create a value object in `app/values` (ex : [`app/values/phone_value.rb`](test/dummy/app/values/phone_value.rb))
 2. Add this to your model : `value_object :phone, :mobile, PhoneValue` (ex : [`app/model/user.rb`](test/dummy/app/models/user.rb))
@@ -28,9 +26,16 @@ The _naked_ instance of `PhoneValue("323-216-3461")` still returns `"323-216-346
 1. Create a value object in `app/values` (ex : [`app/values/position_value.rb`](test/dummy/app/values/position_value.rb))
 2. Add this to your model : `value_object :position, PositionValue` (ex : [`app/model/user.rb`](test/dummy/app/models/user.rb))
 3. Make sure your value object has a `to_db` method that returns the right type
+4. (_optional_) Make it `Comparable` for sorting
 
 ````ruby
 class PositionValue
+  include Comparable
+
+  def <=>(other)
+    to_db <=> other.to_db
+  end
+
   def to_db
     @value.to_i
   end
