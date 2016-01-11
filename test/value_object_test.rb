@@ -9,7 +9,7 @@ class ValueObjectTest < ActiveSupport::TestCase
   end
 
   test "should be a module" do
-    assert_kind_of Module, ObjectValue
+    assert_kind_of Module, ValueObject
   end
 
   test "should have the method" do

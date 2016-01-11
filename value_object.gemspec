@@ -6,12 +6,12 @@ require "value_object/version"
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "value_object"
-  s.version     = ObjectValue::VERSION
+  s.version     = ValueObject::VERSION
   s.authors     = ["dsimard"]
   s.email       = ["dsimard@azanka.ca"]
   s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ObjectValue."
-  s.description = "TODO: Description of ObjectValue."
+  s.summary     = "TODO: Summary of ValueObject."
+  s.description = "TODO: Description of ValueObject."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]

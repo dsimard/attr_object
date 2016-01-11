@@ -140,8 +140,8 @@ PLATFORMS
 DEPENDENCIES
   guard
   guard-minitest
-  value_object!
   sqlite3
+  value_object!
 
 BUNDLED WITH
    1.10.6

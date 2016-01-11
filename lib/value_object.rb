@@ -1,4 +1,4 @@
-module ObjectValue
+module ValueObject
   extend ActiveSupport::Concern
 
   module ClassMethods
