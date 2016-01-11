@@ -41,14 +41,14 @@ class ValueObjectTest < ActiveSupport::TestCase
   test "should update position to next" do
     u = user position: 10
 
-    u.position.next!
+    assert_equal 11, u.position.next!
     assert_equal 11, u.position.value
 
     # TODO
     # assert_equal 11, u[:position], "should also be 11"
 
     assert u.save
-    assert_equal 11, u.reload.position.value
+    assert_equal 11, u.reload[:position]
   end
 
   test "two instances should have distinct values" do
@@ -60,5 +60,22 @@ class ValueObjectTest < ActiveSupport::TestCase
 
   test "if value to nil, it's not instanciated" do
     assert_nil user.position
+  end
+
+  test "#to_db" do
+    assert user(position:2).position.to_db.is_a?(Fixnum)
+  end
+
+  test "`reload` should clear cache" do
+    u = user(position: 1)
+    u.save
+
+    u.position.next!
+    assert_equal 2, u.position.value
+
+    u.reload
+    assert_equal 1, u[:position]
+    skip "TODO"
+    assert_equal 1, u.position.value
   end
 end

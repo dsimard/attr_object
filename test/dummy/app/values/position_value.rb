@@ -8,4 +8,8 @@ class PositionValue
   def next!
     @value += 1
   end
+
+  def to_db
+    @value
+  end
 end

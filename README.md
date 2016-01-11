@@ -23,4 +23,6 @@ end
 
 The _naked_ instance of `PhoneValue("323-216-3461")` still returns `"323-216-3461"`.
 
-###
+### If not using `DelegateClass`
+
+- Create method named `to_db`
