@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = ValueObject::VERSION
   s.authors     = ["dsimard"]
   s.email       = ["dsimard@azanka.ca"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ValueObject."
-  s.description = "TODO: Description of ValueObject."
+  s.homepage    = "https://github.com/dsimard/value_object"
+  s.summary     = "Value Objects for Ruby on Rails"
+  s.description = "Value Objects should be used to have more capabilities on a model attribute in Rails."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]

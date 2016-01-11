@@ -1,4 +1,4 @@
-# Value Objects in Rails
+# Value Objects for Ruby on Rails
 
 Value Objects should be used to have more capabilities on a model attribute in Rails. Example, a `phone_number` attribute that is simply a string could have methods to return the `area_code`, an unformated version or a formated standardized version.
 
