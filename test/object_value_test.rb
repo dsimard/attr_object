@@ -4,7 +4,7 @@ class ObjectValueTest < ActiveSupport::TestCase
   DEFAULT_PHONE = "959-542-5256"
   DEFAULT_MOBILE = "878-858-5115"
 
-  def user(phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE)
+  def user(phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE, position: nil)
     User.new phone: phone, mobile: mobile
   end
 
@@ -27,6 +27,6 @@ class ObjectValueTest < ActiveSupport::TestCase
   end
 
   test "`id` should be an IdValue" do
-    assert user.id.is_a?(IdValue)
+    assert user(position:10).position.is_a?(PositionValue)
   end
 end
