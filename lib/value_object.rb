@@ -45,11 +45,5 @@ module ValueObject
     end
   end
 
-  module ClassMethods
-
-
-
-  end
-
   ActiveRecord::Base.send :include, ValueObject
 end
