@@ -11,12 +11,14 @@ module ValueObject
 
         # The reader (ex : `user.phone`)
         define_method field do
+          return if read_attribute(field).nil?
+
           # Use the cached instance if available
           instance_var = instance_variable_get instance_var_name
           return instance_var if instance_var
 
           # Cache the instance
-          inst_var = klass.new(read_attribute(field))
+          inst_var = klass.new read_attribute(field)
           instance_variable_set instance_var_name, inst_var
         end
 

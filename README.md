@@ -8,7 +8,6 @@ What is a value object?
 
 1. Create a value object in `app/values` (ex : [`app/values/phone_value.rb`](test/dummy/app/values/phone_value.rb))
 2. Add this call in your model : `value_object :phone, :mobile, PhoneValue` (ex : [`app/model/user.rb`](test/dummy/app/models/user.rb))
-3. Done!
 
 ### Use `DelegateClass` for you value objects
 

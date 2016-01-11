@@ -12,7 +12,7 @@ class ValueObjectTest < ActiveSupport::TestCase
     assert_kind_of Module, ValueObject
   end
 
-  test "should have the method" do
+  test "should have the `value_object` method" do
     assert User.methods.include?(:value_object)
     assert ActiveRecord::Base.methods.include?(:value_object)
   end
@@ -56,5 +56,9 @@ class ValueObjectTest < ActiveSupport::TestCase
     user_2 = user phone: "999-999-9999"
 
     refute_equal user_1.phone, user_2.phone
+  end
+
+  test "if value to nil, it's not instanciated" do
+    assert_nil user.position
   end
 end
