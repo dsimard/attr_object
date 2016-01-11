@@ -25,4 +25,8 @@ class ObjectValueTest < ActiveSupport::TestCase
   test "should call a method from the object value" do
     assert_equal "9595425256", user.phone.unformat
   end
+
+  test "`id` should be an IdValue" do
+    assert user.id.is_a?(IdValue)
+  end
 end
