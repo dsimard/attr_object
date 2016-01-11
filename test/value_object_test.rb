@@ -1,81 +1,111 @@
 require 'test_helper'
 
-class ValueObjectTest < ActiveSupport::TestCase
+require 'minitest/spec'
+
+describe ValueObject do
   DEFAULT_PHONE = "959-542-5256"
   DEFAULT_MOBILE = "878-858-5115"
 
-  def user(phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE, position: nil)
+  def userz(phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE, position: nil)
     User.new phone: phone, mobile: mobile, position: position
   end
 
-  test "should be a module" do
+  let(:user) do
+    User.new phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE
+  end
+
+  it "should be a module" do
     assert_kind_of Module, ValueObject
   end
 
-  test "should have the `value_object` method" do
-    assert User.methods.include?(:value_object)
-    assert ActiveRecord::Base.methods.include?(:value_object)
+  describe "User" do
+    it "should have the `value_object` method" do
+      assert User.methods.include?(:value_object)
+      assert ActiveRecord::Base.methods.include?(:value_object)
+    end
   end
 
-  test "should return the right class on the attribute" do
-    assert user.phone.is_a?(PhoneValue), "`phone` should be PhoneValue"
-    assert user.mobile.is_a?(PhoneValue), "`mobile` should be PhoneValue"
+  describe PhoneValue do
+    it "should return the right class on the attribute" do
+      assert user.phone.is_a?(PhoneValue), "`phone` should be PhoneValue"
+      assert user.mobile.is_a?(PhoneValue), "`mobile` should be PhoneValue"
+    end
+
+    it "should call a method from the value object" do
+      assert_equal "9595425256", user.phone.unformat
+    end
+
+    it "should be respond to numbering plan" do
+      assert_equal "959", user.phone.area_code
+      assert_equal "542", user.phone.central_office
+      assert_equal "5256", user.phone.subscriber_number
+    end
+
+    describe "with two users" do
+      let(:user_2) do
+        User.new phone: "111-111-1111"
+      end
+
+      it "two instances should have distinct values" do
+        refute_equal user.phone, user_2.phone
+      end
+
+      it "should be sorted on phone.subscriber_number" do
+        users = [user, user_2]
+        _(users.sort_by(&:phone)).must_equal [user_2, user]
+      end
+    end
   end
 
-  test "should call a method from the value object" do
-    assert_equal "9595425256", user.phone.unformat
-  end
+  describe PositionValue do
+    let(:user) do
+      User.new position: 0
+    end
 
-  test "`position` should be a PositionValue" do
-    assert user(position:10).position.is_a?(PositionValue)
-  end
+    it "`position` should be a PositionValue" do
+      _(user.position).must_be_instance_of PositionValue
+    end
 
-  test "`position` should be updated as a `Fixnum`" do
-    u = user position:10
-    assert_equal 10, u.position.value
-    u.position = 99
-    assert u.save
-    assert_equal 99, u.reload.position.value
-  end
+    it "`position` should be updated as a `Fixnum`" do
+      assert_equal 0, user.position.value
+      user.position = 99
+      assert user.save
+      assert_equal 99, user.reload.position.value
+    end
 
-  test "should update position to next" do
-    u = user position: 10
+    it "should update position to next" do
+      assert_equal 1, user.position.next!
+      assert_equal 1, user.position.value
 
-    assert_equal 11, u.position.next!
-    assert_equal 11, u.position.value
+      # TODO
+      # assert_equal 1, u[:position], "should also be updated"
 
-    # TODO
-    # assert_equal 11, u[:position], "should also be 11"
+      assert user.save
+      assert_equal 1, user.reload[:position]
+    end
 
-    assert u.save
-    assert_equal 11, u.reload[:position]
-  end
+    it "#to_db" do
+      _(user.position.to_db).must_be_instance_of Fixnum
+    end
 
-  test "two instances should have distinct values" do
-    user_1 = user
-    user_2 = user phone: "999-999-9999"
+    it "`reload` should clear cache" do
+      user.save
 
-    refute_equal user_1.phone, user_2.phone
-  end
+      user.position.next!
+      assert_equal 1, user.position.value
 
-  test "if value to nil, it's not instanciated" do
-    assert_nil user.position
-  end
+      user.reload
+      assert_equal 0, user[:position]
+      skip "TODO"
+      assert_equal 0, user.position.value
+    end
 
-  test "#to_db" do
-    assert user(position:2).position.to_db.is_a?(Fixnum)
-  end
+    describe "without position" do
+      let(:user) { User.new }
 
-  test "`reload` should clear cache" do
-    u = user(position: 1)
-    u.save
-
-    u.position.next!
-    assert_equal 2, u.position.value
-
-    u.reload
-    assert_equal 1, u[:position]
-    skip "TODO"
-    assert_equal 1, u.position.value
+      it "if value to nil, it's not instanciated" do
+        assert_nil user.position
+      end
+    end
   end
 end
