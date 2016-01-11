@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :object_value do
+# task :value_object do
 #   # Task goes here
 # end

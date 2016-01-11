@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ObjectValueTest < ActiveSupport::TestCase
+class ValueObjectTest < ActiveSupport::TestCase
   DEFAULT_PHONE = "959-542-5256"
   DEFAULT_MOBILE = "878-858-5115"
 
@@ -13,8 +13,8 @@ class ObjectValueTest < ActiveSupport::TestCase
   end
 
   test "should have the method" do
-    assert User.methods.include?(:object_value)
-    assert ActiveRecord::Base.methods.include?(:object_value)
+    assert User.methods.include?(:value_object)
+    assert ActiveRecord::Base.methods.include?(:value_object)
   end
 
   test "should return the right class on the attribute" do
@@ -22,7 +22,7 @@ class ObjectValueTest < ActiveSupport::TestCase
     assert user.mobile.is_a?(PhoneValue), "`mobile` should be PhoneValue"
   end
 
-  test "should call a method from the object value" do
+  test "should call a method from the value object" do
     assert_equal "9595425256", user.phone.unformat
   end
 

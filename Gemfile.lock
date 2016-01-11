@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    object_value (0.0.1)
+    value_object (0.0.1)
       rails (~> 4.2.5)
 
 GEM
@@ -140,7 +140,7 @@ PLATFORMS
 DEPENDENCIES
   guard
   guard-minitest
-  object_value!
+  value_object!
   sqlite3
 
 BUNDLED WITH

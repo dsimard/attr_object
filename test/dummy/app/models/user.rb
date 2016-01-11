@@ -1,4 +1,4 @@
 class User < ActiveRecord::Base
-  object_value :phone, :mobile, PhoneValue
-  object_value :position, PositionValue
+  value_object :phone, :mobile, PhoneValue
+  value_object :position, PositionValue
 end

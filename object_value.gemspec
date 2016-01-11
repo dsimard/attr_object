@@ -1,11 +1,11 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "object_value/version"
+require "value_object/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "object_value"
+  s.name        = "value_object"
   s.version     = ObjectValue::VERSION
   s.authors     = ["dsimard"]
   s.email       = ["dsimard@azanka.ca"]
