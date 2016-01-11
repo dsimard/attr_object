@@ -1,11 +1,11 @@
 class PositionValue
-  attr_accessor :position
+  attr_accessor :value
 
-  def initialize(position)
-    @position = position
+  def initialize(value)
+    @value = value
   end
 
-  def next
-    @position + 1
+  def next!
+    @value += 1
   end
 end

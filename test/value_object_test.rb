@@ -5,7 +5,7 @@ class ValueObjectTest < ActiveSupport::TestCase
   DEFAULT_MOBILE = "878-858-5115"
 
   def user(phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE, position: nil)
-    User.new phone: phone, mobile: mobile
+    User.new phone: phone, mobile: mobile, position: position
   end
 
   test "should be a module" do
@@ -26,7 +26,35 @@ class ValueObjectTest < ActiveSupport::TestCase
     assert_equal "9595425256", user.phone.unformat
   end
 
-  test "`id` should be an IdValue" do
+  test "`position` should be a PositionValue" do
     assert user(position:10).position.is_a?(PositionValue)
+  end
+
+  test "`position` should be updated as a `Fixnum`" do
+    u = user position:10
+    assert_equal 10, u.position.value
+    u.position = 99
+    assert u.save
+    assert_equal 99, u.reload.position.value
+  end
+
+  test "should update position to next" do
+    u = user position: 10
+
+    u.position.next!
+    assert_equal 11, u.position.value
+
+    # TODO
+    # assert_equal 11, u[:position], "should also be 11"
+
+    assert u.save
+    assert_equal 11, u.reload.position.value
+  end
+
+  test "two instances should have distinct values" do
+    user_1 = user
+    user_2 = user phone: "999-999-9999"
+
+    refute_equal user_1.phone, user_2.phone
   end
 end
