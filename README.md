@@ -6,7 +6,8 @@ Value Objects should be used to have more capabilities on a model attribute in R
 
 ## How to use
 
-1. Create a value object in `app/values` (ex : [`app/values/phone_value.rb`](test/dummy/app/values/phone_value.rb))
+1. Create a value object with `rails generate attr_object attribute_name [type]` (ex: `rails generate attr_object phone fixnum`). `type` is optional.
+2. File is created in `app/attr_objects` (ex : [`app/attr_objects/phone_value.rb`](test/dummy/app/attr_objects/phone_value.rb))
 2. Add this to your model : `attr_object :phone, :mobile, PhoneValue` (ex : [`app/model/user.rb`](test/dummy/app/models/user.rb))
 
 ### Use `DelegateClass` for you value objects (recommended)

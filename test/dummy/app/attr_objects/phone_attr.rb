@@ -1,4 +1,4 @@
-class PhoneValue < DelegateClass(String)
+class PhoneAttr < DelegateClass(String)
   include Comparable
 
   # See https://en.wikipedia.org/wiki/North_American_Numbering_Plan

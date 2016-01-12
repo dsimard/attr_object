@@ -1,4 +1,4 @@
-class PositionValue
+class PositionAttr
   attr_accessor :value
 
   def initialize(value)

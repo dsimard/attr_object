@@ -1,0 +1,10 @@
+Description:
+    Create an `attr_object` class (see https://github.com/dsimard/attr_object)
+
+Example:
+    rails generate attr_object phone [class]
+
+    This will create:
+        app/attr_objects/phone_attr.rb
+
+    `class` must be a valid Ruby class
