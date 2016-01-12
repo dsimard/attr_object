@@ -1,4 +1,4 @@
-# `attr_object` : Value Objects for Ruby on Rails
+# `attr_object` : value objects for ruby on rails
 
 [![Build Status](https://travis-ci.org/dsimard/attr_object.svg?branch=master)](https://travis-ci.org/dsimard/attr_object)
 
