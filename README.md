@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/dsimard/attr_object.svg?branch=master)](https://travis-ci.org/dsimard/attr_object)
 
-Value Objects should be used to have more capabilities on a model attribute in Rails. Example, a `phone_number` attribute that is simply a string could have methods to return the `area_code`, an unformated version or a formated standardized version.
+Value Objects are used to add methods on model attributes in Rails. Example, a `phone_number` attribute that is simply a string could have methods to return the `area_code`, an unformated version or a formated standardized version.
 
 ## How to use
 
@@ -44,3 +44,48 @@ class PositionValue
   end
 end
 ````
+
+## Why use `attr_object`?
+
+To explain why, I will once again use the infamous `phone` attribute which a `String`.
+
+### Slim down your models
+
+To deal with phone numbers, we often end up with a mess of methods like this.
+
+````ruby
+class User < ActiveRecord::Base
+  def unformat_phone
+    # ...
+  end
+
+  def format_phone
+    # ...
+  end
+
+  def area_code
+    # ...
+  end
+
+  private
+  def phone_to_i
+    # ...
+  end
+end
+````
+
+`attr_object` helps you unclutter that mess.
+
+````ruby
+class User < ActiveRecord::Base
+  attr_object :phone, PhoneAttr
+end
+````
+
+### Keep responsibilities where they belong
+
+According to the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), methods about the `phone` attribute don't belong in your `User` model.
+
+### Rails is not just MVC
+
+We often build applications as if we could write code in just three different places : models, views or controllers. And if things go wild, we rely on concerns and helpers. That should not be the case.
