@@ -21,8 +21,8 @@ guard :minitest do
   watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { |m| "test/#{m[1]}test_#{m[2]}.rb" }
   watch(%r{^test/test_helper\.rb$})      { 'test' }
 
-  watch(%r{^test/(.*)\.rb$}) { 'test' }
-  watch(%r{^lib/(.*)\.rb$}) { 'test' }
+  watch(%r{^test/(.*)\.rb$}) { 'test/attr_object_test.rb' }
+  watch(%r{^lib/attr_object\.rb$}) { 'test/attr_object_test.rb' }
 
   # with Minitest::Spec
   # watch(%r{^spec/(.*)_spec\.rb$})
