@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
 end
 ````
 
-`attr_object` helps you unclutter that mess.
+`attr_object` helps you clean up that mess.
 
 ````ruby
 class User < ActiveRecord::Base
