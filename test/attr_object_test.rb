@@ -36,6 +36,10 @@ describe AttrObject do
       assert_equal "5256", user.phone.subscriber_number
     end
 
+    it "should be delegated" do
+      assert_equal "959", user.phone_area_code
+    end
+
     describe "with two users" do
       let(:user_2) do
         User.new phone: "111-111-1111"
