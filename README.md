@@ -4,7 +4,13 @@
 
 Value Objects are used to add methods on model attributes in Rails. Example, a `phone_number` attribute that is simply a string could have methods to return the `area_code`, an unformated version or a formated standardized version.
 
-## How to use
+## Installation
+
+Include the gem in your Gemfile:
+
+`gem "attr_object"`
+
+Then follow these instructions to create your first `attr_object` :
 
 1. Create a value object with `rails generate attr_object attribute_name [type]` (ex: `rails generate attr_object phone fixnum`). `type` is optional.
 2. File is created in `app/attr_objects` (ex : [`app/attr_objects/phone_value.rb`](test/dummy/app/attr_objects/phone_value.rb))
