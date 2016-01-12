@@ -2,7 +2,7 @@ require 'test_helper'
 
 require 'minitest/spec'
 
-describe ValueObject do
+describe AttrObject do
   DEFAULT_PHONE = "959-542-5256"
   DEFAULT_MOBILE = "878-858-5115"
 
@@ -15,13 +15,13 @@ describe ValueObject do
   end
 
   it "should be a module" do
-    assert_kind_of Module, ValueObject
+    assert_kind_of Module, AttrObject
   end
 
   describe "User" do
-    it "should have the `value_object` method" do
-      assert User.methods.include?(:value_object)
-      assert ActiveRecord::Base.methods.include?(:value_object)
+    it "should have the `attr_object` method" do
+      assert User.methods.include?(:attr_object)
+      assert ActiveRecord::Base.methods.include?(:attr_object)
     end
   end
 

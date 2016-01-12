@@ -1,9 +1,9 @@
-module ValueObject
+module AttrObject
   extend ActiveSupport::Concern
 
   included do
     before_validation do
-      fields = self.class.value_object_fields || []
+      fields = self.class.attr_object_fields || []
 
       fields.each do |field|
         value = send field
@@ -13,14 +13,14 @@ module ValueObject
       end
     end
 
-    cattr_accessor :value_object_fields
+    cattr_accessor :attr_object_fields
     class << self
-      def value_object(*fields, klass)
-        self.value_object_fields ||= []
-        self.value_object_fields += fields
+      def attr_object(*fields, klass)
+        self.attr_object_fields ||= []
+        self.attr_object_fields += fields
 
         fields.each do |field|
-          instance_var_name = "@value_object_#{field}"
+          instance_var_name = "@attr_object_#{field}"
 
           # The reader (ex : `user.phone`)
           define_method field do
@@ -45,5 +45,5 @@ module ValueObject
     end
   end
 
-  ActiveRecord::Base.send :include, ValueObject
+  ActiveRecord::Base.send :include, AttrObject
 end
