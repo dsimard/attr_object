@@ -22,7 +22,8 @@ guard :minitest do
   watch(%r{^test/test_helper\.rb$})      { 'test' }
 
   watch(%r{^test/(.*)\.rb$}) { 'test' }
-  watch(%r{^lib/(.*)\.rb$}) { 'test' }
+  watch(%r{^lib/attr_object\.rb$}) { 'test/attr_object_test.rb' }
+  watch(%r{^lib/generators/**/*.rb$}) { 'test/lib/generators/' }
 
   # with Minitest::Spec
   # watch(%r{^spec/(.*)_spec\.rb$})

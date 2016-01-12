@@ -1,14 +1,9 @@
 require 'test_helper'
-
 require 'minitest/spec'
 
 describe AttrObject do
   DEFAULT_PHONE = "959-542-5256"
   DEFAULT_MOBILE = "878-858-5115"
-
-  def userz(phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE, position: nil)
-    User.new phone: phone, mobile: mobile, position: position
-  end
 
   let(:user) do
     User.new phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE
@@ -25,10 +20,10 @@ describe AttrObject do
     end
   end
 
-  describe PhoneValue do
+  describe PhoneAttr do
     it "should return the right class on the attribute" do
-      assert user.phone.is_a?(PhoneValue), "`phone` should be PhoneValue"
-      assert user.mobile.is_a?(PhoneValue), "`mobile` should be PhoneValue"
+      assert user.phone.is_a?(PhoneAttr), "`phone` should be PhoneValue"
+      assert user.mobile.is_a?(PhoneAttr), "`mobile` should be PhoneValue"
     end
 
     it "should call a method from the value object" do
@@ -57,13 +52,13 @@ describe AttrObject do
     end
   end
 
-  describe PositionValue do
+  describe PositionAttr do
     let(:user) do
       User.new position: 0
     end
 
     it "`position` should be a PositionValue" do
-      _(user.position).must_be_instance_of PositionValue
+      _(user.position).must_be_instance_of PositionAttr
     end
 
     it "`position` should be updated as a `Fixnum`" do
