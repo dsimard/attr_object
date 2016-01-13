@@ -1,6 +1,8 @@
 # `attr_object` : value objects for ruby on rails
 
 [![Build Status](https://travis-ci.org/dsimard/attr_object.svg?branch=master)](https://travis-ci.org/dsimard/attr_object)
+[![Code Climate](https://codeclimate.com/github/dsimard/value_object/badges/gpa.svg)](https://codeclimate.com/github/dsimard/value_object)
+[![Test Coverage](https://codeclimate.com/github/dsimard/value_object/badges/coverage.svg)](https://codeclimate.com/github/dsimard/value_object/coverage)
 
 Value Objects are used to add methods on model attributes in Rails. Example, a `phone_number` attribute that is simply a string could have methods to return the `area_code`, an unformated version or a formated standardized version.
 
