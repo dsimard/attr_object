@@ -36,7 +36,7 @@ module AttrObject
           end
 
           # The writer (ex : `user.phone=`)
-          define_method "#{field.to_s}=" do |val|
+          define_method "#{field}=" do |val|
             instance_variable_set instance_var_name, nil
             write_attribute field, val
           end

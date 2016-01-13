@@ -29,6 +29,7 @@ ratings:
 exclude_paths:
 - test/**/*
 - **/*.yml
+- lib/generators/attr_object/templates/*
 ---
 engines:
   bundler-audit:
