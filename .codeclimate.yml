@@ -28,7 +28,7 @@ ratings:
   - "**.rb"
 exclude_paths:
 - test/**/*
-- **/*.yml
+- "**/*.yml"
 - lib/generators/attr_object/templates/*
 ---
 engines:
