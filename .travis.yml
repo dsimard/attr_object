@@ -7,4 +7,4 @@ env:
   - "RAILS_VERSION=master"
 addons:
     code_climate:
-        repo_token: 4c17fe1e320c31f38b751e71de5381816a585eaf9672e4adef5e917eac65ad99
+        repo_token: b416c6c8c8ce2700e258c6392c428f156a8f9625fa229d954942c9d16396caef
