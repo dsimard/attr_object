@@ -28,6 +28,7 @@ ratings:
   - "**.rb"
 exclude_paths:
 - test/**/*
+- **/*.yml
 ---
 engines:
   bundler-audit:
