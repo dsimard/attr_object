@@ -6,10 +6,6 @@ module AttrObject
       @attributes = {}
     end
 
-    def add_attribute attribute, klass
-      @attributes[attribute] = Value.new klass
-    end
-
     def set klass, attribute, value
       @attributes[attribute] = Value.new klass, value
     end
