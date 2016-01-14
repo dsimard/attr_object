@@ -3,50 +3,30 @@ module AttrObject
     extend ActiveSupport::Concern
 
     included do
-      cattr_accessor :obj_attr_manager
+      def obj_attr_manager
+        @obj_attr_manager ||= Manager.new
+      end
 
       before_validation do
-        fields = self.class.attr_object_fields || []
-
-        fields.each do |field|
-          value = send field
-          value = value.to_db if value.respond_to? :to_db
-
-          send "#{field}=", value
+        manager = @obj_attr_manager
+        manager.attributes.each do |attribute, value|
+          cast = value.cast
+          cast = cast.to_db if cast.respond_to? :to_db
+          self[attribute] = cast
         end
       end
 
-      cattr_accessor :attr_object_fields
       class << self
         def attr_object(*fields, klass)
-          self.attr_object_fields ||= []
-          self.attr_object_fields += fields
-
           fields.each do |field|
-            self.obj_attr_manager ||= Manager.new
-            self.obj_attr_manager.add_attribute field, klass
-
-            instance_var_name = "@attr_object_#{field}"
-
             # The reader (ex : `user.phone`)
             define_method field do
-              return if read_attribute(field).nil?
-
-              # Use the cached instance if available
-              instance_var = instance_variable_get instance_var_name
-              return instance_var if instance_var
-
-              # Cache the instance
-              inst_var = klass.new read_attribute(field)
-              instance_variable_set instance_var_name, inst_var
+              obj_attr_manager.get field
             end
 
             # The writer (ex : `user.phone=`)
             define_method "#{field}=" do |val|
-              self.class.obj_attr_manager.set field, val
-              
-              instance_variable_set instance_var_name, nil
-              write_attribute field, val
+              obj_attr_manager.set klass, field, val
             end
           end
         end

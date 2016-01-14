@@ -50,6 +50,7 @@ describe AttrObject do
 
       it "should be sorted on phone.subscriber_number" do
         users = [user, user_2]
+        users.each &:save
         _(users.sort_by(&:phone)).must_equal [user_2, user]
       end
     end
@@ -77,7 +78,6 @@ describe AttrObject do
 
       # TODO
       # assert_equal 1, u[:position], "should also be updated"
-
       assert user.save
       assert_equal 1, user.reload[:position]
     end
