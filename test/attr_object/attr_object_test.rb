@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'minitest/spec'
 
 describe AttrObject do
   DEFAULT_PHONE = "959-542-5256"
