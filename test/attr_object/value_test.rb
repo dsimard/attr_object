@@ -18,10 +18,4 @@ describe Value do
     assert_equal 40, cast.to_next_decade!
     assert_equal 5, cast.decade
   end
-
-  it "should clear cache if changing value" do
-    assert_equal 4, cast.decade # read it once for caching
-    val.value = 20
-    assert_equal 3, val.cast.decade
-  end
 end

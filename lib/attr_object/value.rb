@@ -9,18 +9,12 @@ module AttrObject
     end
 
     def value=(val)
-      clear_cache
       @value = val
     end
 
     def cast
       return if @value.nil?
       @cast ||= @klass.new @value
-    end
-
-    private
-    def clear_cache
-      @cast = nil
     end
   end
 end
