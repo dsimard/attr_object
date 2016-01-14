@@ -4,6 +4,6 @@ class AgeAttr < DelegateClass(Fixnum)
   end
 
   def to_next_decade!
-    __setobj__(__getobj__ + 10)
+    __setobj__ self + 10
   end
 end

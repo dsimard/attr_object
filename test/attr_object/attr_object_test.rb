@@ -5,7 +5,7 @@ describe AttrObject do
   DEFAULT_MOBILE = "878-858-5115"
 
   let(:user) do
-    User.new phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE
+    User.create phone: DEFAULT_PHONE, mobile: DEFAULT_MOBILE
   end
 
   it "should be a module" do
@@ -41,7 +41,7 @@ describe AttrObject do
 
     describe "with two users" do
       let(:user_2) do
-        User.new phone: "111-111-1111"
+        User.create phone: "111-111-1111"
       end
 
       it "two instances should have distinct values" do
@@ -58,7 +58,7 @@ describe AttrObject do
 
   describe PositionAttr do
     let(:user) do
-      User.new position: 0
+      User.create position: 0
     end
 
     it "`position` should be a PositionValue" do
@@ -99,10 +99,26 @@ describe AttrObject do
     end
 
     describe "without position" do
-      let(:user) { User.new }
+      let(:user) { User.create }
 
       it "if value to nil, it's not instanciated" do
         assert_nil user.position
+      end
+    end
+  end
+
+  describe AgeAttr do
+    let(:user) { User.create }
+
+    it "should return nil" do
+      user.age.must_be_nil
+    end
+
+    describe "with an age" do
+      let(:user) { User.create age:30 }
+
+      it "should have a value" do
+        user.age.must_equal 30
       end
     end
   end
